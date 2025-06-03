@@ -10,20 +10,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  Ascii_job:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      - name: install cowsay program
+        run: sudo apt-get install cowsay -y
 
-      - name: Install dependencies
-        run: npm install
+      - name: Execute cowsay CMD
+        run: cowsay -f dragon "Run for cover, iam a Dragon....RAWR" >> dragon.txt
 
-      - name: Run tests
-        run: npm test
+      - name: Test File Exists
+        run: grep -i "dragon" dragon.txt
+
+      - name: Read File
+        run: cat dragon.txt
+
+      - name: checkout repo files
+        run: ls
